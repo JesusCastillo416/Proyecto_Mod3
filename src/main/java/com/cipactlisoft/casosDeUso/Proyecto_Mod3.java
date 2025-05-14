@@ -19,7 +19,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author salvador
@@ -33,7 +32,7 @@ public class Proyecto_Mod3 {
             IMonitorDAO monitorDAO = new MonitorDAOImpl();
             ITarjetaVideoDAO tarjetaDAO = new TarjetaVideoDAOImpl();
             IDiscoDuroDAO discoDAO = new DiscoDuroDAOImpl();
-            
+
             // Crear componentes
             /*MonitorDTO monitor = new MonitorDTO();
             monitor.setId("MON004");
@@ -48,9 +47,9 @@ public class Proyecto_Mod3 {
             monitor.setTasaRefresco(144);
             
             monitorDAO.crear(monitor);
-            */
+             */
             // Crear una PC con componentes
-           /*
+            /*
             PcDTO nuevaPc = new PcDTO();
             nuevaPc.setId("PC004");
             nuevaPc.setDescripcion("PC Workstation Premium");
@@ -58,7 +57,7 @@ public class Proyecto_Mod3 {
             nuevaPc.setModelo("Workstation Pro");
             nuevaPc.setCosto(new BigDecimal("1500.00"));
             nuevaPc.setPrecioBase(new BigDecimal("2499.99"));
-            */
+             */
             // Agregar componentes a la PC
             /*List<ComponenteDTO> componentes = new ArrayList<>();
             componentes.add(tarjetaDAO.obtenerTarjetaPorId("GPU003")); // RTX 4090
@@ -67,22 +66,79 @@ public class Proyecto_Mod3 {
             
             nuevaPc.setSubComponentes(componentes);
             pcDAO.crear(nuevaPc);
-            */
+             */
             // Consultar PCs
             System.out.println("\n--- PCs en el sistema ---");
             List<PcDTO> pcs = pcDAO.obtenerTodasPcs();
             pcs.forEach(pc -> {
-                System.out.println("\nPC: " + pc.getDescripcion() + 
-                                 " - Precio Base: $" + pc.getPrecioBase());
+                System.out.println("\nPC: " + pc.getDescripcion()
+                        + " - Precio Base: $" + pc.getPrecioBase());
                 System.out.println("Componentes incluidos:");
-                pc.getSubComponentes().forEach(comp -> 
-                    System.out.println(" - " + comp.getDescripcion() + 
-                                     " (" + comp.getMarca() + ")"));
+                pc.getSubComponentes().forEach(comp
+                        -> System.out.println(" - " + comp.getDescripcion()
+                                + " (" + comp.getMarca() + ")"));
             });
-            
+
         } catch (SQLException e) {
-            System.err.println("Error en el sistema: " + e.getMessage());
+            System.out.println("Error en el sistema: " + e.getMessage());
             e.printStackTrace();
         }
+        
+        
+        //testCreacionPC();
+
+//    	testAgregarComponentes();
+//    	testEliminarComponente();
+        //testGenerarCotizacion();
+//    	testMostrarCaracteristicas();
+
+//    	testCreacionPcOk_conPcBuilder();
+//    	testCreacionPcErroneo_conPcBuilder_DiscosDeMas();
+//    	testCreacionPcErroneo_conPcBuilder_SinDiscos();
+//    }
+    /*
+    
+
+    private static void testGenerarCotizacion() {
+
+        ICotizador cotizador = getCotizadorActual();
+
+        Componente monitor = Componente.crearMonitor("M001", "Monitor 17 pulgadas", "Samsung", "Goliat-500",
+                new BigDecimal(1000), new BigDecimal(2000));
+        cotizador.agregarComponente(1, monitor);
+
+        Componente monitor2 = Componente.crearMonitor("M022", "Monitor 15 pulgadas", "Sony", "VR-30",
+                new BigDecimal(1100), new BigDecimal(2000));
+        cotizador.agregarComponente(4, monitor2);
+        cotizador.agregarComponente(7, monitor2);
+
+        Componente disco = Componente.crearDiscoDuro("D-23", "Disco estado sólido", "Seagate", "T-455", new BigDecimal(500),
+                new BigDecimal(1000), "2TB");
+        cotizador.agregarComponente(10, disco);
+
+        Componente tarjeta = Componente.crearTarjetaVideo("C0XY", "Tarjeta THOR", "TechBrand", "X200-34",
+                new BigDecimal("150.00"), new BigDecimal("300.00"), "8GB");
+        cotizador.agregarComponente(10, tarjeta);
+
+        Componente discoPc = Componente.crearDiscoDuro("D001", "Disco Seagate", "TechXYZ", "X200",
+                new BigDecimal("1880.00"), new BigDecimal("2000.00"), "1TB");
+        Componente monitorPc = Componente.crearMonitor("M001", "Monitor 17 pulgadas", "Sony", "Z9000",
+                new BigDecimal("3200.00"), new BigDecimal("6000.00"));
+        Componente tarjetaPc = Componente.crearTarjetaVideo("C001", "Tarjeta XYZ", "TechBrand", "X200",
+                new BigDecimal("150.00"), new BigDecimal("200.00"), "16GB");
+
+        Componente miPc = Componente.crearPc("pc0001", "Laptop 15000 s300", "Dell", "Terminator",
+                List.of(discoPc, monitorPc, tarjetaPc));
+        cotizador.agregarComponente(1, miPc);
+        Cotizacion cotizacion = cotizador.generarCotizacion();
+        cotizacion.emitirComoReporte();
+    }
+
+    private static ICotizador getCotizadorActual() {
+        return Config.getCotizador();
+    }
+
+    
+     */
     }
 }
